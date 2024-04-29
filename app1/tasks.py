@@ -1,13 +1,9 @@
 import time
 from datetime import datetime
-from threading import Thread
+from celery import shared_task
 
 
-def async_send_email(to):
-    task = Thread(target=send_mail, args=(to,))
-    task.start()
-
-
+@shared_task
 def send_mail(to):
-    time.sleep(2)
+    time.sleep(10)
     print(">>> Email sent to", to, "at", datetime.now())
